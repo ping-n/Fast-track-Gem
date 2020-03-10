@@ -21,5 +21,3 @@ def menu
     end
   end
 end
- 
-def 

@@ -1,17 +1,3 @@
-
-class Employee
-  attr_accessor
-
-  def initialize(first_name, last_name, age, gender)
-    @first_name = first_name
-    @last_name = last_name
-    @age = age
-    @gender = gender
-  end
-
-end
-
-
 employee_profile = []
 
 def create_profile
