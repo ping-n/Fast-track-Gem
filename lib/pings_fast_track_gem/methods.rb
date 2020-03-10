@@ -1,5 +1,3 @@
-employee_profile = []
-
 def create_profile
   puts 'Enter First Name: '
   first_name = gets.chomp.capitalize
@@ -12,6 +10,14 @@ def create_profile
 
   puts 'Enter a Gender: '
   gender = gets.chomp.capitalize
+end
 
-  employee_profile << Employee.new(first_name, last_name, age, gender)
+# def profile_update
+
+# end
+
+def add_shift
+  puts 'which employee would like to add shift for?'
+  e_name = gets.chomp.capitalize
+
 end

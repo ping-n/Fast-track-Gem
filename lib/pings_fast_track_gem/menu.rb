@@ -1,3 +1,7 @@
+require_relative "./Employee"
+require_relative "./methods"
+
+employee_profile = []
 
 def menu
   loop do
@@ -12,9 +16,12 @@ def menu
   selection = gets.chomp.to_i
 
   case selection
-    when 1
-    when 2
-    when 3
+    when 1 
+      create_profile()
+      # need to figure out how to save the data
+      employee_profile << Employee.new(first_name, last_name, age, gender)
+    # when 2
+    # when 3
     else 4
       puts "Thank you for using our service"
       exit
