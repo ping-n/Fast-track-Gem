@@ -4,6 +4,7 @@ employee_profile = []
 prompt = TTY::Prompt.new
 
 def create_profile
+  system "clear"
   puts 'Enter First Name: '
   f_name = gets.chomp.capitalize
 
@@ -22,20 +23,29 @@ def create_profile
 end
 
 def update_profile(employees)
-  puts "Which employee profile would you like to update?"
-  print ">> "
-  name_input = gets.chomp.capitalize
+  system "clear"
+  prompt = TTY::Prompt.new
+  # puts "Which employee profile would you like to update?"
+  # print ">> "
+  name_input = prompt.ask("Which employee profile would you like to update?") do |q|
+    q.required(true)
+    q.validate /\A\w+\Z/
+    q.modify   :capitalize
+  end
+  # name_input = gets.chomp.capitalize
   found = employees.detect do |employee|
   employee.first_name == name_input
   end
   if found
-  puts "Please select from the following options"
-  puts "1: Update First Name"
-  puts "2: Update Last Name"
-  puts "3: Update Age"
-  puts "4: Update Gender"
-  print ">> "
-  selection = gets.chomp.to_i
+  # puts "Please select from the following options"
+  # puts "1: Update First Name"
+  # puts "2: Update Last Name"
+  # puts "3: Update Age"
+  # puts "4: Update Gender"
+  # print ">> "
+  selection = prompt.select('Please select from the following options') do
+  
+  # selection = gets.chomp.to_i
     case selection
       when 1
       puts "Enter new First Name: "
@@ -70,6 +80,7 @@ def write_csv(employees)
 end
 
 def add_shift
+  system "clear"
   puts 'Enter a day: (e.g monday)'
   print ">> "
   day = gets.chomp.capitalize
