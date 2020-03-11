@@ -1,5 +1,6 @@
 require_relative "version"
 employees = []
+prompt = TTY::Prompt.new
 
 def menu(employees)
   loop do
@@ -16,7 +17,7 @@ def menu(employees)
     when 1 
       create_profile(employees)
     when 2
-    update_profile(employees)
+      update_profile(employees)
     when 3
       add_shift()
     else 4

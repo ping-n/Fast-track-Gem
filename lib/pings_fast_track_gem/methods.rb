@@ -2,29 +2,6 @@ require_relative "version"
 
 employee_profile = []
 
-def create_profile
-  puts 'Enter First Name: '
-  first_name = gets.chomp.capitalize
-
-  puts 'Enter Last Name: '
-  last_name = gets.chomp.capitalize
-
-  puts 'Enter a Age: '
-  age = gets.chomp.to_i
-
-  puts 'Enter a Gender: '
-  gender = gets.chomp.capitalize
-end
-
-def read_employee_csv(employees)
-  csv_text = File.read('database.csv')
-  csv = CSV.parse(csv_text, headers: true)
-  csv.each do |employee|
-    employee_hash = employee.to_hash
-    employees << Employee.new(employee_hash["First Name"], employee_hash["Last Name"], employee_hash["Age"], employee_hash["Gender"])
-  end 
-end
-
 def create_profile(employees)
   puts 'Enter First Name: '
   f_name = gets.chomp.capitalize
@@ -44,7 +21,6 @@ def create_profile(employees)
 end
 
 def update_profile(employees)
-  
   puts "Which employee profile would you like to update?"
   print ">> "
   name_input = gets.chomp.capitalize
@@ -57,6 +33,7 @@ def update_profile(employees)
   puts "2: Update Last Name"
   puts "3: Update Age"
   puts "4: Update Gender"
+  print ">> "
   selection = gets.chomp.to_i
     case selection
       when 1
@@ -76,7 +53,39 @@ def update_profile(employees)
       user_input = gets.chomp.capitalize
       found.gender = user_input
     end
+    write_csv(employees) 
   else 
     puts "employee not found"
+  end
+end
+
+def write_csv(employees)
+ CSV.open "database.csv", "w" do |file|
+  file << ['First Name','Last Name','Age','Gender']
+  employees.each do |employee|
+  file << employee.to_a
+  end
+ end
+end
+
+def add_shift
+  puts 'Enter a day: (e.g monday)'
+  print ">> "
+  day = gets.chomp.capitalize
+
+  puts 'Enter name of employee: '
+  print ">> "
+  name = gets.chomp.capitalize
+
+  puts 'Enter starting time: (e.g  8:00am)'
+  print ">> "
+  s_time = gets.chomp
+
+  puts 'Enter ending time: (e.g 4:00pm)'
+  print ">> "
+  e_time = gets.chomp
+
+  CSV.open("shift.csv", "ab") do |csv|
+    csv << [day, name, s_time, e_time]
   end
 end
