@@ -1,7 +1,6 @@
 require_relative "version"
 
 employee_profile = []
-prompt = TTY::Prompt.new
 
 def create_profile
   system "clear"
@@ -25,43 +24,48 @@ end
 def update_profile(employees)
   system "clear"
   prompt = TTY::Prompt.new
-  # puts "Which employee profile would you like to update?"
-  # print ">> "
   name_input = prompt.ask("Which employee profile would you like to update?") do |q|
     q.required(true)
     q.validate /\A\w+\Z/
     q.modify   :capitalize
   end
-  # name_input = gets.chomp.capitalize
   found = employees.detect do |employee|
   employee.first_name == name_input
   end
   if found
-  # puts "Please select from the following options"
-  # puts "1: Update First Name"
-  # puts "2: Update Last Name"
-  # puts "3: Update Age"
-  # puts "4: Update Gender"
-  # print ">> "
-  selection = prompt.select('Please select from the following options') do
-  
-  # selection = gets.chomp.to_i
+  selection = prompt.select('Please select from the following options') do |menu|
+    menu.enum "."
+    menu.choice 'Update First Name', 1
+    menu.choice 'Update Last Name', 2
+    menu.choice 'Update Age', 3
+    menu.choice 'Update Gender', 4
+  end
     case selection
       when 1
-      puts "Enter new First Name: "
-      user_input = gets.chomp.capitalize
+      user_input = prompt.ask("Enter new first name: ") do |q|
+        q.required(true)
+        q.validate /\A\w+\Z/
+        q.modify   :capitalize
+      end
       found.first_name = user_input
       when 2
-      puts "Enter new Last Name: " 
-      user_input = gets.chomp.capitalize
-      found.last_name = user_input
+      user_input = prompt.ask("Enter new last name: ") do |q|
+        q.required(true)
+        q.validate /\A\w+\Z/
+        q.modify   :capitalize
+      end
+      found.first_name = user_input
       when 3
-      puts "Enter new age: " 
-      user_input = gets.chomp
+      user_input = prompt.ask("Enter new age: ") do |q|
+        q.required(true)
+      end
       found.age = user_input
       when 4
-      puts "Enter new gender: "
-      user_input = gets.chomp.capitalize
+      user_input = prompt.ask("Enter new gender: ") do |q|
+        q.required(true)
+        q.validate /\A\w+\Z/
+        q.modify   :capitalize
+      end
       found.gender = user_input
     end
     write_csv(employees) 
@@ -81,9 +85,9 @@ end
 
 def add_shift
   system "clear"
-  puts 'Enter a day: (e.g monday)'
-  print ">> "
-  day = gets.chomp.capitalize
+  prompt = TTY::Prompt.new
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  day = prompt.select("Please select a day: ", days, filter: true)
 
   puts 'Enter name of employee: '
   print ">> "
