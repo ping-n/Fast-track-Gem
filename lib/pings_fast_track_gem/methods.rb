@@ -4,17 +4,25 @@ employee_profile = []
 
 def create_profile
   system "clear"
-  puts 'Enter First Name: '
-  f_name = gets.chomp.capitalize
+  f_name = prompt.ask("Enter first name:") do |q|
+    q.required(true)
+    q.validate /\A\w+\Z/
+    q.modify   :capitalize
+  end
 
-  puts 'Enter Last Name: '
-  l_name = gets.chomp.capitalize
+  l_name = prompt.ask("Enter last name:") do |q|
+    q.required(true)
+    q.validate /\A\w+\Z/
+    q.modify   :capitalize
+  end
 
-  puts 'Enter a Age: '
-  age = gets.chomp.to_i
+  Age = prompt.ask("Enter age:")
 
-  puts 'Enter a Gender: '
-  gender = gets.chomp.capitalize
+  gender = prompt.ask("Enter gender") do |q|
+    q.required(true)
+    q.validate /\A\w+\Z/
+    q.modify   :capitalize
+  end
 
   CSV.open("database.csv", "ab") do |csv|
     csv << [f_name, l_name, age, gender]
