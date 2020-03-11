@@ -3,13 +3,7 @@ require "tty-prompt"
 prompt = TTY::Prompt.new
 
 
- user = prompt.select("Choose your destiny?") do |menu|
-  menu.enum '.'
-
-  menu.choice 'Scorpion', 1
-  menu.choice 'Kano', 2
-  menu.choice 'Jax', 3
-end
-
-puts " "
-p user 
+size = prompt.slider('Time', max: 24, step: 0.05, format: "|:slider| %.2f")
+# =>
+# Volume ──────────●────────── 50
+# (Use arrow keys, press Enter to select)
