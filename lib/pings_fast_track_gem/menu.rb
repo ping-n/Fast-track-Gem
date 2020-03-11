@@ -1,8 +1,6 @@
-require_relative "./Employee"
-require_relative "./methods"
+require_relative "version"
 
-
-def menu
+def menu(employees)
   loop do
   puts "Please choose from the following options"
   puts "1: Creating a new profile"
@@ -13,13 +11,14 @@ def menu
   print ""
   print ">>"
   selection = gets.chomp.to_i
-
   case selection
     when 1 
-      create_profile()
-      # need to figure out how to save the data
-    # when 2
-    # when 3
+      create_profile(employees)
+      read_employee_csv(employees)
+    when 2
+      update_profile(employees)
+    when 3
+      
     else 4
       puts "Thank you for using our service"
       exit
