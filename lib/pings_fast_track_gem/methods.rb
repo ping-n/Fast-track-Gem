@@ -1,8 +1,9 @@
 require_relative "version"
 
 employee_profile = []
+prompt = TTY::Prompt.new
 
-def create_profile(employees)
+def create_profile
   puts 'Enter First Name: '
   f_name = gets.chomp.capitalize
 
