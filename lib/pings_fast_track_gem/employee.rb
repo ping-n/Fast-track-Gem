@@ -2,17 +2,21 @@
 require "csv"
 
 employees = []
+testing = []
 
 class Employee
-  attr_reader :f_name, :l_name, :age, :gender
+  attr_accessor :first_name, :last_name, :age, :gender
 
   def initialize(f_name, l_name, age, gender)
     @first_name = f_name
     @last_name = l_name
     @age = age
     @gender = gender
-    @shift = []
   end
+
+  # def name
+  #   p "#{@first_name}"
+  # end
 
   def add_shift
     # puts 'Please input employee name: '
@@ -29,6 +33,15 @@ class Employee
   end
 end 
 
+# def read_employee_csv(employees)
+#   csv_text = File.read('database.csv')
+#   csv = CSV.parse(csv_text, headers: true)
+#   csv.each do |employee|
+#     employee_hash = employee.to_hash
+#     employees << Employee.new(employee_hash["First Name"], employee_hash["Last Name"], employee_hash["Age"], employee_hash["Gender"])
+#   end 
+# end
+ 
 def read_employee_csv(employees)
   csv_text = File.read('database.csv')
   csv = CSV.parse(csv_text, headers: true)
@@ -38,26 +51,77 @@ def read_employee_csv(employees)
   end 
 end
 
-def create_profile(employees)
-  puts 'Enter First Name: '
-  f_name = gets.chomp.capitalize
+# sam = Employee.new("Sam", "Smith", 24, "Male")
+# sam.first_name
 
-  puts 'Enter Last Name: '
-  l_name = gets.chomp.capitalize
+read_employee_csv(employees)
+# pp employees
+# employees[4].name = "Ping"
 
-  puts 'Enter a Age: '
-  age = gets.chomp.to_i
 
-  puts 'Enter a Gender: '
-  gender = gets.chomp.capitalize
+# def create_profile(employees)
+#   puts 'Enter First Name: '
+#   f_name = gets.chomp.capitalize
+
+#   puts 'Enter Last Name: '
+#   l_name = gets.chomp.capitalize
+
+#   puts 'Enter a Age: '
+#   age = gets.chomp.to_i
+
+#   puts 'Enter a Gender: '
+#   gender = gets.chomp.capitalize
   
-  # employee = Employee.new(name, age, gender)
-  # employees << employee
+#   # employee = Employee.new(name, age, gender)
+#   # employees << employee
 
-  CSV.open("database.csv", "ab") do |csv|
-    csv << [f_name, l_name, age, gender]
-  end 
+#   CSV.open("database.csv", "ab") do |csv|
+#     csv << [f_name, l_name, age, gender]
+#   end 
+# end
+
+# create_profile(employees)
+
+def update_profile(employees)
+  
+  puts "Which employee profile would you like to update?"
+  print ">> "
+  name_input = gets.chomp.capitalize
+  found = employees.detect do |employee|
+  employee.first_name == name_input
+  end
+  if found
+  puts "Please select from the following options"
+  puts "1: Update First Name"
+  puts "2: Update Last Name"
+  puts "3: Update Age"
+  puts "4: Update Gender"
+  selection = gets.chomp.to_i
+    case selection
+      when 1
+      puts "Enter new First Name: "
+      user_input = gets.chomp.capitalize
+      found.first_name = user_input
+      when 2
+      puts "Enter new Last Name: " 
+      user_input = gets.chomp.capitalize
+      found.last_name = user_input
+      when 3
+      puts "Enter new age: " 
+      user_input = gets.chomp
+      found.age = user_input
+      when 4
+      puts "Enter new gender: "
+      user_input = gets.chomp.capitalize
+      found.gender = user_input
+    end
+  else 
+    puts "employee not found"
 end
 
-create_profile(employees)
+p found
+  
 
+# end
+
+# update_profile(employees)
