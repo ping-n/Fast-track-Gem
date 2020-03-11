@@ -14,7 +14,7 @@ attr_accessor :first_name, :last_name, :age, :gender
 end
 
 class Shift
-attr_accessor :day :name :s_time, :e_time
+attr_accessor :day, :name, :s_time, :e_time
   def initialize(day, name, s_time, e_time)
     @day  = day
     @name = name
@@ -23,25 +23,26 @@ attr_accessor :day :name :s_time, :e_time
   end
 end
 
-# def read_employee_csv(employees)
-#   csv_text = File.read('database.csv')
-#   csv = CSV.parse(csv_text, headers: true)
-#   csv.each do |employee|
-#     employee_hash = employee.to_hash
-#     employees << Employee.new(employee_hash["First Name"], employee_hash["Last Name"], employee_hash["Age"], employee_hash["Gender"])
-#   end 
-# end
+def read_employee_csv(employees)
+  csv_text = File.read('database.csv')
+  csv = CSV.parse(csv_text, headers: true)
+  csv.each do |employee|
+    employee_hash = employee.to_hash
+    employees << Employee.new(employee_hash["First Name"], employee_hash["Last Name"], employee_hash["Age"], employee_hash["Gender"])
+  end 
+end
 
-# def read_shift_csv(shift)
-#   csv_text = File.read('shift.csv')
-#   csv = CSV.parse(csv_text, headers: true)
-#   csv.each do |shift|
-#     shift_hash = shift.to_hash
-#     shifts << Shift.new(shift_hash["Day"], shift_hash["Name"], shift_hash["Start Time"], shift_hash["End Time"])
-#   end 
-# end
+def read_shift_csv(shifts)
+  csv_text = File.read('shift.csv')
+  csv = CSV.parse(csv_text, headers: true)
+  csv.each do |shift|
+    shift_hash = shift.to_hash
+    shifts << Shift.new(shift_hash["Day"], shift_hash["Name"], shift_hash["Start Time"], shift_hash["End Time"])
+  end 
+end
 
-# read_employee_csv(employees)
+read_shift_csv(shifts)
+read_employee_csv(employees)
 
 def add_shift
   puts 'Enter a day: (e.g monday)'
@@ -60,8 +61,7 @@ def add_shift
   print ">> "
   e_time = gets.chomp
 
-  CSV.open("database.csv", "ab") do |csv|
+  CSV.open("shift.csv", "ab") do |csv|
     csv << [day, name, s_time, e_time]
+  end
 end
-
-add_shift

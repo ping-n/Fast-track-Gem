@@ -37,9 +37,6 @@ def create_profile(employees)
 
   puts 'Enter a Gender: '
   gender = gets.chomp.capitalize
-  
-  employee = Employee.new(f_name,l_name, age, gender)
-  employees << employee
 
   CSV.open("database.csv", "ab") do |csv|
     csv << [f_name, l_name, age, gender]
@@ -81,4 +78,5 @@ def update_profile(employees)
     end
   else 
     puts "employee not found"
+  end
 end
