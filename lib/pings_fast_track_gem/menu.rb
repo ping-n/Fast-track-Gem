@@ -1,6 +1,5 @@
 require_relative "version"
 
-employees = []
 $artii = Artii::Base.new
 $pastel = Pastel.new
 
@@ -13,7 +12,16 @@ def read_employee_csv
   end 
 end
 
-def menu(data)
+def read_shifts_csv
+  csv_text = File.read('./csv/shift.csv')
+  csv = CSV.parse(csv_text, headers: true)
+  csv.map do |shift|
+    shift_hash = shift.to_hash
+    Shift.new(shift_hash["Day"], shift_hash["Name"], shift_hash["Start Time"], shift_hash["End Time"])
+  end 
+end
+
+def menu(employee, shift)
   prompt = TTY::Prompt.new
   system("clear")
   puts $artii.asciify('Roster App').colorize(:black).colorize( :background => :green)
@@ -26,7 +34,9 @@ def menu(data)
       menu.choice 'Create New Employee', 1
       menu.choice 'Update Existing Profile', 2
       menu.choice 'Assign Shifts', 3
-      menu.choice 'Exit Application', 4
+      menu.choice 'View Employee Profile', 4
+      menu.choice 'View Existing Shift', 5
+      menu.choice 'Exit Application', 6
     end
 
     case user_selection
@@ -36,7 +46,11 @@ def menu(data)
       update_profile(data)
     when 3
       add_shift
-    when 4
+    when 4 
+      pp data
+    when 5
+      pp shift
+    when 6
       puts "**" * 27
       puts $pastel.bright_red.bold("Thank you for using our service")
       puts "**" * 27
@@ -45,4 +59,4 @@ def menu(data)
   end
 end
 
-menu(read_employee_csv)
+menu(read_employee_csv, read_shifts_csv)

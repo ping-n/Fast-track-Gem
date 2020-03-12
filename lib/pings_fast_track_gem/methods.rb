@@ -1,6 +1,5 @@
 require_relative "version"
 
-employee_profile = []
 $prompt = TTY::Prompt.new(active_color: :bright_red)
 
 def create_profile

@@ -1,7 +1,8 @@
 require "csv"
 require "colorize"
 require "tty-prompt"
-require 'artii'
+require "tty-table"
+require "artii"
 require_relative "./methods"
 require_relative "./Class"
 require_relative "./menu"
