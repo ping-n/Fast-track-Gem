@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'colorize', '~> 0.8.1'
   spec.add_dependency 'tty-prompt', '~> 0.21.0'
   spec.add_dependency 'artii', '~> 2.1', '>= 2.1.2'
+  sped.add_dependency 'lolcat', '~> 42.24'
 end
