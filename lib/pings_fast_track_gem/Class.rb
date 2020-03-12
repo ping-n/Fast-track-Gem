@@ -23,14 +23,3 @@ attr_accessor :day, :name, :s_time, :e_time
     @end_time = e_time
   end
 end
-
-# def read_shift_csv(shifts)
-#   csv_text = File.read('shift.csv')
-#   csv = CSV.parse(csv_text, headers: true)
-#   csv.each do |shift|
-#     shift_hash = shift.to_hash
-#     shifts << Shift.new(shift_hash["Day"], shift_hash["Name"], shift_hash["Start Time"], shift_hash["End Time"])
-#   end 
-# end
-
-# read_shift_csv(shifts)
