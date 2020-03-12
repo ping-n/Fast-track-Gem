@@ -16,7 +16,7 @@ end
 def menu(data)
   prompt = TTY::Prompt.new
   system("clear")
-  puts $artii.asciify('Roster App')
+  puts $artii.asciify('Roster App').colorize(:light_green).colorize( :background => :light_white)
   puts $pastel.bright_red.bold('Welcome to the roster app')
   
   user_selection = prompt.select('Please select from the following options', active_color: :bright_blue) do |menu|
