@@ -5,7 +5,10 @@ $prompt = TTY::Prompt.new(active_color: :bright_red)
 
 def create_profile
   system "clear"
-  puts $artii.asciify('Create Profile')
+  puts $artii.asciify('Create Profile').colorize(:black).colorize( :background => :green)
+  puts "**" * 27
+  puts $pastel.bright_red.bold('Creating profile')
+  puts "**" * 27
   f_name = $prompt.ask("Enter first name:") do |q|
     q.required(true)
     q.validate /\A\w+\Z/
@@ -33,7 +36,10 @@ end
 
 def update_profile(employees)
   system "clear"
-  puts $artii.asciify('Update Profile')
+  puts $artii.asciify('Update Profile').colorize(:black).colorize( :background => :green)
+  puts "**" * 27
+  puts $pastel.bright_red.bold('Updating Profile')
+  puts "**" * 27
   name_input = $prompt.ask("Which employee profile would you like to update?") do |q|
     q.required(true)
     q.validate /\A\w+\Z/
@@ -56,6 +62,7 @@ def update_profile(employees)
       user_input = $prompt.ask("Enter new first name:") do |q|
         q.required(true)
         q.validate /\A\w+\Z/
+        q.messages[:valid?] = 'invalid input'
         q.modify   :capitalize
       end
       found.first_name = user_input
@@ -63,18 +70,21 @@ def update_profile(employees)
       user_input = $prompt.ask("Enter new last name:") do |q|
         q.required(true)
         q.validate /\A\w+\Z/
+        q.messages[:valid?] = 'invalid input'
         q.modify   :capitalize
       end
       found.last_name = user_input
       when 3
       user_input = $prompt.ask("Enter new age:") do |q|
         q.required(true)
+        q.validate /\A\w+\Z/
       end
       found.age = user_input
       when 4
       user_input = $prompt.ask("Enter new gender:") do |q|
         q.required(true)
         q.validate /\A\w+\Z/
+        q.messages[:valid?] = 'invalid input'
         q.modify   :capitalize
       end
       found.gender = user_input
@@ -96,22 +106,26 @@ end
 
 def add_shift
   system "clear"
-  puts $artii.asciify('Assign Shift')
+  puts $artii.asciify('Assign Shift').colorize(:black).colorize( :background => :green)
+  puts "**" * 27
+  puts $pastel.bright_red.bold('Assigning Shift')
+  puts "**" * 27
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   day = $prompt.select("Please select a day:", days, filter: true, active_color: :bright_green)
 
-  name = $prompt.ask('Please input the name of the employee: ') do |q|
+  name = $prompt.ask('Please input the name of the employee:') do |q|
     q.required(true)
     q.validate /\A\w+\Z/
+    q.messages[:valid?] = 'invalid input'
     q.modify   :capitalize
   end
 
   times = [
     '12:00am', '1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:30am', '1:30am', '2:30am', '3:30am', '4:30am', '5:30am', '6:30am', '7:30am', '8:30am', '9:30am', '10:30am', '11:30am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', '9:00pm', '10:00pm', '11:00pm', '12:30pm', '1:30pm', '2:30pm', '3:30pm', '4:30pm', '5:30pm', '6:30pm', '7:30pm', '8:30pm', '9:30pm', '10:03pm', '11:30pm'
   ]
-  s_time = $prompt.select('Please select start time:', times)
+  s_time = $prompt.select('Please select start time:', times, filter: true)
 
-  e_time = $prompt.select('Please select start time:', times)
+  e_time = $prompt.select('Please select end time:', times, filter: true)
 
   CSV.open("./csv/shift.csv", "ab") do |csv|
     csv << [day, name, s_time, e_time]

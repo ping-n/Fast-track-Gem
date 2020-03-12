@@ -16,26 +16,32 @@ end
 def menu(data)
   prompt = TTY::Prompt.new
   system("clear")
-  puts $artii.asciify('Roster App').colorize(:light_green).colorize( :background => :light_white)
-  puts $pastel.bright_red.bold('Welcome to the roster app')
-  
-  user_selection = prompt.select('Please select from the following options', active_color: :bright_blue) do |menu|
-    menu.choice 'Create New Employee', 1
-    menu.choice 'Update Existing Profile', 2
-    menu.choice 'Assign Shifts', 3
-    menu.choice 'Exit Application', 4
-  end
+  puts $artii.asciify('Roster App').colorize(:black).colorize( :background => :green)
 
-  case user_selection
-  when 1
-    create_profile
-  when 2
-    update_profile(data)
-  when 3
-    add_shift
-  when 4
-    puts "Thank you for using our service"
-    exit
+  puts "**" * 27
+  puts $pastel.bright_red.bold('Welcome to the roster app')
+  puts "**" * 27
+  loop do
+    user_selection = prompt.select('Please select from the following options', active_color: :bright_blue) do |menu|
+      menu.choice 'Create New Employee', 1
+      menu.choice 'Update Existing Profile', 2
+      menu.choice 'Assign Shifts', 3
+      menu.choice 'Exit Application', 4
+    end
+
+    case user_selection
+    when 1
+      create_profile
+    when 2
+      update_profile(data)
+    when 3
+      add_shift
+    when 4
+      puts "**" * 27
+      puts $pastel.bright_red.bold("Thank you for using our service")
+      puts "**" * 27
+      exit
+    end
   end
 end
 
