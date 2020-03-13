@@ -1,5 +1,10 @@
-require_relative "version"
-
+require 'artii'
+require 'tty-prompt'
+require 'pastel'
+require 'csv'
+require 'colorize'
+require_relative './menu'
+String.disable_colorization = false
 $prompt = TTY::Prompt.new(active_color: :bright_red)
 
 def create_profile
@@ -28,7 +33,7 @@ def create_profile
     q.modify   :capitalize
   end
 
-  CSV.open("./csv/database.csv", "ab") do |csv|
+  CSV.open("./database.csv", "ab") do |csv|
     csv << [f_name, l_name, age, gender]
   end 
 end
@@ -95,7 +100,7 @@ def update_profile(employees)
 end
 
 def write_csv(employees)
- CSV.open "./csv/database.csv", "w" do |file|
+ CSV.open "./database.csv", "w" do |file|
   file << ['First Name','Last Name','Age','Gender']
   employees.each do |employee|
   file << employee.to_a
@@ -126,7 +131,7 @@ def add_shift
 
   e_time = $prompt.select('Please select end time:', times, filter: true)
 
-  CSV.open("./csv/shift.csv", "ab") do |csv|
+  CSV.open("./shift.csv", "ab") do |csv|
     csv << [day, name, s_time, e_time]
   end
 end

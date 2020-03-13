@@ -1,6 +1,3 @@
-require_relative "version"
-# shifts = []
-
 class Employee
 attr_accessor :first_name, :last_name, :age, :gender
   def initialize(f_name, l_name, age, gender)

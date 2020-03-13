@@ -1,19 +1,26 @@
-require_relative "version"
+require 'artii'
+require 'tty-prompt'
+require 'pastel'
+require 'csv'
+require 'colorize'
+require_relative './Class'
+require_relative './methods'
+String.disable_colorization = false
+
 
 $artii = Artii::Base.new
 $pastel = Pastel.new
 
 def read_employee_csv
-  csv_text = File.read('./csv/database.csv')
+  csv_text = File.read('./database.csv')
   csv = CSV.parse(csv_text, headers: true)
   csv.map do |employee|
     employee_hash = employee.to_hash
     Employee.new(employee_hash["First Name"], employee_hash["Last Name"], employee_hash["Age"], employee_hash["Gender"])
   end 
 end
-
 def read_shifts_csv
-  csv_text = File.read('./csv/shift.csv')
+  csv_text = File.read('./shift.csv')
   csv = CSV.parse(csv_text, headers: true)
   csv.map do |shift|
     shift_hash = shift.to_hash
@@ -43,11 +50,11 @@ def menu(employee, shift)
     when 1
       create_profile
     when 2
-      update_profile(data)
+      update_profile(employee)
     when 3
       add_shift
-    when 4 
-      pp data
+    when 4
+      pp employee
     when 5
       pp shift
     when 6
@@ -58,5 +65,6 @@ def menu(employee, shift)
     end
   end
 end
+
 
 menu(read_employee_csv, read_shifts_csv)
