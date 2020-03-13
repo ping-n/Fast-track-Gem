@@ -8,9 +8,20 @@ The purpose of the roster app is provide users with a tool create employee profi
 The main target audience for this app is managers and small business owners who will be able to keep track of their employee's shift. Many managers and small owners still tracks their employee and assign shift through paper documents. Paper documents are convenient to use but they take up physical space and can easily be misplaced or sabotage by others. The roster app will provide users with a simple and interactive prompt to input data and store in a csv file for further use. The roster app will solve a lot of employer issue when hiring as they can quickly create an employee profile, input basic details about the employee which they return to change at will.
 
 ### Features
-There are two main feature for this app, the ability to create new employee profile and assigning shifts to employee. The user will be able to create many employee profile which will be store in a csv file, the user can then update any existing employee profile to change any original value that they assigned to the employee. 
-The second main feature of the app is to provide the user with the ability to assign shift to employee which will be saved to a separate cv file which store all the shift that they assigned for their employee. The other feature of the app to show a quick list all employee or shift by simply selecting the correct prompts from menu.
 
+#### Create Employee
+This is the starting features of the terminal app, it allows user to create a new employee profile from scratch. The create employee command will request user to input  data about the employee profile they want to create, asking for basic details such as the full name, age and gender. (Once privacy features is implemented, the data input can be expand to include address, phone and email or others details the employer may need)
+
+#### Update Employee
+This feature enable the user to input the name of employee they wish to to update and match it with the name of the employee in the database. The terminal grab that employee profile from the database and allow user to select which details they wish to change or update.
+
+#### Assign Shift
+This feature allow the user to create a shift for any employee by asking of for the name, the day of the week, starting time of the shift and end time of the shift. (Future will include the ability customer more details of the shift, including starting area or position such as full time or part time)
+
+#### View existing employee profile and shift
+This feature allow the user to view the existing data store in the csv files and list them in the terminal. Future features will make it more user friendly by displaying the data in clean manner in order for the user to quickly find the information they need, also implement a search and filter function.
+
+#### Example layout
 Menu page:
   <ul>
   <li> Create employee profile</li>
@@ -26,13 +37,62 @@ Menu page:
   <li> View all shifts </li>
     ==> print out data about existing shift in the terminal
 </ul>
+
+## Project planning and implementation
+
+The planning involve brainstorming how to implement the features and how to make the terminal app as user friendly as possible. The early app prototype involve many users inputs, basically asking the user to input everything, this can become a tedious task for users therefore the many users input was removed from the app through the use of tyy-prompt gem. The tty-prompt provide a fast and simple method to gather user inputs through selection and filter that allow user to specifies what they want. 
+
+### Checklist
+
+
+High priority:
+<ol>
+  <li>Planning of idea</li>
+  <li>Menu system</li>
+  <li> Create employee profiles</li>
+  <li> Data persistence through csv </li>
+  <li> Update employee profiles</li>
+  <li>Ensure MVP by due date</li>
+  <li>Assign shift feature<li>
+</ol>
+
+
+
+Medium priority:
+<ol>
+  <li>View employee feature</li>
+  <li>View all shift feature</li>
+  <li>Running rubocop</li>
+  <li>Testing</li>
+  <li>using gems such as tty-prompt to provide clean terminal prompt for user input</li>
+</ol>
+<br />
+
+
+Low priority (future update):
+<ol>
+  <li>Data security</li>
+  <li>login feature</li>
+  <li>Storing more data such as expanding creating employee profile features to ask for more information</li>
+  <li>Testing</li>
+</ol>
+<br />
     
-### UML
+### UML and Trello
 
-![UML Diagram](./docs/uml)
+![UML Diagram](./docs/uml.png)<br />
 
-### Resources
-[My app building process](https://trello.com/b/eLUrMcdd/terminal-app)
+![Trello1](./doc/t1.png)<br />
+
+![Trello2](./doc/t2.png)<br />
+
+### Testing
+Some manual testing was done on the terminal app to ensure MVP, some minor bug were found and recorded to be fix in future patches
+
+[Manual Testing](https://docs.google.com/spreadsheets/d/1EdQasinQsBZe7woDLr1d8weSilS7EZtF6YNYbAlWxWo/edit?usp=sharing)
+
+### links
+[Management process](https://trello.com/b/eLUrMcdd/terminal-app)
 [UML Diagram](https://www.lucidchart.com/invitations/accept/98b1f7c4-8408-42c2-a2bf-3874764834fa)
 
 ## Usage
@@ -107,6 +167,19 @@ Or install it yourself as:
     $ gem install colorize
     $ gem install artii
 
+### Starting the terminal app
+This instruction is designed for the terminal app being install on your Desktop
+locate the exe file in the src folder
+run the command exe called Application starter.command
+
+![Run this file](./docs/cmdfile.png)
+
+if top command does not work, please run as per usual in your terminal with the following command from your home directories. (Folder must in on you desktop)
+
+change your directories to your Desktop through your command terminal
+
+    $ cd PingNge_T1A2/src/lib
+    $ ruby pings_fast_track_gem
 
 ## Development
 

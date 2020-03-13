@@ -1,6 +1,3 @@
-require_relative "./menu"
+# frozen_string_literal: true
 
-module PingsFastTrackGem
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative './menu'
